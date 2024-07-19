@@ -5,6 +5,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
 #include "Interaction/EnemyInterface.h"
+#include "Camera/CameraInterface.h"
 
 AAuraPlayerController::AAuraPlayerController()
 {
@@ -43,7 +44,54 @@ void AAuraPlayerController::SetupInputComponent()
 	UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent);
 
 	EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AAuraPlayerController::Move);
+	EnhancedInputComponent->BindAction(ZoomInAction, ETriggerEvent::Triggered, this, &AAuraPlayerController::ZoomIn);
+	EnhancedInputComponent->BindAction(ZoomOutAction, ETriggerEvent::Triggered, this, &AAuraPlayerController::ZoomOut);
+	EnhancedInputComponent->BindAction(ResetSpringArmAction, ETriggerEvent::Triggered, this, &AAuraPlayerController::ResetSpringArmLength);
+
 	
+}
+
+void AAuraPlayerController::ZoomIn()
+{
+	AdjustSpringArmLength(-ZoomStep);
+}
+
+void AAuraPlayerController::ZoomOut()
+{
+	AdjustSpringArmLength(ZoomStep);
+}
+
+void AAuraPlayerController::ResetSpringArmLength()
+{
+	APawn* ControlledPawn = GetPawn();
+	if (ControlledPawn && ControlledPawn->GetClass()->ImplementsInterface(UCameraInterface::StaticClass()))
+	{
+		if (ICameraInterface* CameraPawn = Cast<ICameraInterface>(ControlledPawn))
+		{
+			if (CameraPawn)
+			{
+				CameraPawn->ResetSpringArm();
+			}
+		}
+	}
+}
+
+void AAuraPlayerController::AdjustSpringArmLength(float DeltaLength)
+{
+	APawn* ControlledPawn = GetPawn();
+	if (ControlledPawn && ControlledPawn->GetClass()->ImplementsInterface(UCameraInterface::StaticClass()))
+	{
+		if (ICameraInterface* CameraPawn = Cast<ICameraInterface>(ControlledPawn))
+		{
+			if (CameraPawn)
+			{
+				// Get current spring arm length and adjust
+				float CurrentLength = CameraPawn->GetSpringArmLength();
+				float NewLength = FMath::Clamp(CurrentLength + DeltaLength, MinZoomLength, MaxZoomLength);
+				CameraPawn->AdjustSpringArmLength(NewLength);
+			}
+		}
+	}
 }
 
 void AAuraPlayerController::Move(const FInputActionValue& InputActionValue)

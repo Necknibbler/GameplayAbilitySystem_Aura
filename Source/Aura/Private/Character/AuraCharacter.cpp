@@ -11,7 +11,7 @@ AAuraCharacter::AAuraCharacter()
 {
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
 	CameraBoom->SetupAttachment(GetRootComponent());
-	CameraBoom->TargetArmLength = 750.f;
+	CameraBoom->TargetArmLength = SpringArmLength;
 	CameraBoom->SetRelativeRotation(FRotator(-45.f, 0.f, 0.f));
 
 	ViewCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("ViewCamera"));
@@ -26,4 +26,29 @@ AAuraCharacter::AAuraCharacter()
 	bUseControllerRotationRoll = false;
 	bUseControllerRotationYaw = false;
 	
+}
+
+void AAuraCharacter::AdjustSpringArmLength(float NewLength)
+{
+	if (CameraBoom)
+	{
+		CameraBoom->TargetArmLength = NewLength;
+	}
+}
+
+void AAuraCharacter::ResetSpringArm()
+{
+	if (CameraBoom)
+	{
+		CameraBoom->TargetArmLength = SpringArmLength;
+	}
+}
+
+float AAuraCharacter::GetSpringArmLength()
+{
+	if (CameraBoom)
+	{
+		return CameraBoom->TargetArmLength;
+	}
+	return 0.0f;
 }
