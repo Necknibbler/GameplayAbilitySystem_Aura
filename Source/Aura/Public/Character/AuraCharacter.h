@@ -21,6 +21,8 @@ class AURA_API AAuraCharacter : public AAuraCharacterBase, public ICameraInterfa
 public:
 	AAuraCharacter();
 
+	virtual void PossessedBy(AController* NewController) override;
+	virtual void OnRep_PlayerState() override;
 	virtual void AdjustSpringArmLength(float NewLength) override;
 	virtual void ResetSpringArm() override;
 	virtual float GetSpringArmLength() override;
@@ -34,4 +36,5 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Camera")
 	float SpringArmLength = 750.f;
 
+	void InitAbilityActorInfo();
 };
