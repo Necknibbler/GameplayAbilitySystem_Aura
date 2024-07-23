@@ -1,8 +1,8 @@
 // Copyright Message
 
-#include "Components/SphereComponent.h"
-#include "Actor/AuraEffectActor.h"
 
+#include "Actor/AuraEffectActor.h"
+#include "Components/SphereComponent.h"
 #include "AbilitySystemComponent.h"
 #include "AbilitySystemInterface.h"
 #include "AbilitySystem/AuraAttributeSet.h"
