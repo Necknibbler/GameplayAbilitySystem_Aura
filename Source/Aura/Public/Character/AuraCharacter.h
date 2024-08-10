@@ -36,5 +36,5 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Camera")
 	float SpringArmLength = 750.f;
 
-	void InitAbilityActorInfo();
+	virtual void InitAbilityActorInfo() override;
 };
