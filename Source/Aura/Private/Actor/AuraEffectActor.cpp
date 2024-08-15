@@ -48,7 +48,7 @@ void AAuraEffectActor::OnOverlap(AActor* TargetActor)
 	{
 		if (InstantEffect.ApplicationPolicy == EEffectApplicationPolicy::ApplyOnOverlap)
 		{
-			ApplyEffectToTarget(TargetActor, InstantEffect.EffectClass, EEffectRemovalPolicy::DoNotRemove);
+			ApplyEffectToTarget(TargetActor, InstantEffect.EffectClass, InstantEffect.RemovalPolicy);
 		}
 	}
 
@@ -56,7 +56,7 @@ void AAuraEffectActor::OnOverlap(AActor* TargetActor)
 	{
 		if (DurationEffect.ApplicationPolicy == EEffectApplicationPolicy::ApplyOnOverlap)
 		{
-			ApplyEffectToTarget(TargetActor, DurationEffect.EffectClass, EEffectRemovalPolicy::DoNotRemove);
+			ApplyEffectToTarget(TargetActor, DurationEffect.EffectClass, DurationEffect.RemovalPolicy);
 		}
 	}
 
@@ -75,7 +75,7 @@ void AAuraEffectActor::OnEndOverlap(AActor* TargetActor)
 	{
 		if (InstantEffect.ApplicationPolicy == EEffectApplicationPolicy::ApplyOnEndOverlap)
 		{
-			ApplyEffectToTarget(TargetActor, InstantEffect.EffectClass, EEffectRemovalPolicy::DoNotRemove);
+			ApplyEffectToTarget(TargetActor, InstantEffect.EffectClass, InstantEffect.RemovalPolicy);
 		}
 	}
 
@@ -83,7 +83,7 @@ void AAuraEffectActor::OnEndOverlap(AActor* TargetActor)
 	{
 		if (DurationEffect.ApplicationPolicy == EEffectApplicationPolicy::ApplyOnEndOverlap)
 		{
-			ApplyEffectToTarget(TargetActor, DurationEffect.EffectClass, EEffectRemovalPolicy::DoNotRemove);
+			ApplyEffectToTarget(TargetActor, DurationEffect.EffectClass, DurationEffect.RemovalPolicy);
 		}
 	}
 

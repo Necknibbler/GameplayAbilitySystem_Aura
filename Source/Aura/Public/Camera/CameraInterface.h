@@ -22,7 +22,7 @@ class AURA_API ICameraInterface
 
 	
 public:
-	virtual void AdjustSpringArmLength(float NewLength) = 0;
+	virtual void AdjustSpringArmLength(float const NewLength) = 0;
 	virtual void ResetSpringArm() = 0;
 	virtual float GetSpringArmLength() = 0;
 };

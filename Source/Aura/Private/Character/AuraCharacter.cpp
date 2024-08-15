@@ -50,7 +50,7 @@ void AAuraCharacter::OnRep_PlayerState()
 	InitAbilityActorInfo();
 }
 
-void AAuraCharacter::AdjustSpringArmLength(float NewLength)
+void AAuraCharacter::AdjustSpringArmLength(float const NewLength)
 {
 	if (CameraBoom)
 	{
@@ -91,7 +91,7 @@ void AAuraCharacter::InitAbilityActorInfo()
 			AuraHUD->InitOverlay(AuraPlayerController, AuraPlayerState, AbilitySystemComponent, AttributeSet);
 		}
 	}
-	
+	InitializePrimaryAttributes();
 
 	
 }
