@@ -26,6 +26,10 @@ public:
 	virtual void AdjustSpringArmLength(float const NewLength) override;
 	virtual void ResetSpringArm() override;
 	virtual float GetSpringArmLength() override;
+
+	/** Combat Interface **/
+	virtual int32 GetPlayerLevel() override;
+	/** end Combat Interface **/
 private:
 	UPROPERTY(VisibleAnywhere)
 	USpringArmComponent* CameraBoom;
